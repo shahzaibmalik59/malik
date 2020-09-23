@@ -97,3 +97,24 @@ main{
 	background-image: linear-gradient(to right,#640bff,#0070fa,#649bff);
 	border-radius: 10px;
 	}
+@media (max-width: 768px)
+	{
+		.mainheader
+		{
+	
+	display: inline-grid;
+	}
+	main .right img {
+        width: 470px;
+    height: 402px;
+    padding-right: 196px;
+    padding-top: 105px }
+    .left h2 {
+    font-size: 23px; }
+    .left h1 {
+    white-space: pre;
+    display: inline-block;}
+    main .left {
+    padding-right: 0px;
+    padding-left: 198px;}
+}

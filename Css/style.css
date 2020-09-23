@@ -97,7 +97,7 @@ main{
 	background-image: linear-gradient(to right,#640bff,#0070fa,#649bff);
 	border-radius: 10px;
 	}
-@media (max-width: 768px)
+@media (max-width: 768px) and (min-width: 492px)
 	{
 		.mainheader
 		{

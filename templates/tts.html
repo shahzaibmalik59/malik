@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Text to Speech</title>
+    <link rel="stylesheet" href="/Css/style.css">
+    <style>
+        body { max-width: 600px; margin: auto; padding: 1em; font-family: sans-serif; }
+        textarea { width: 100%; }
+        audio { width: 100%; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Text to Speech</h1>
+    <textarea id="text" rows="4" placeholder="Enter text here"></textarea>
+    <div>
+        <label for="lang">Language:</label>
+        <select id="lang">
+            <option value="en" selected>English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+        </select>
+    </div>
+    <button id="speak">Speak</button>
+    <audio id="audio" controls style="display:none;"></audio>
+    <script>
+        document.getElementById('speak').addEventListener('click', () => {
+            const text = document.getElementById('text').value;
+            const lang = document.getElementById('lang').value;
+            fetch('/synthesize', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text, lang})
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Server error');
+                return res.blob();
+            })
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const audio = document.getElementById('audio');
+                audio.src = url;
+                audio.style.display = 'block';
+                audio.play();
+            })
+            .catch(err => alert(err));
+        });
+    </script>
+</body>
+</html>
